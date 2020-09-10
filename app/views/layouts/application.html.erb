@@ -2,14 +2,17 @@
 <html>
   <head>
     <title><%= full_title(yield(:title))%></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--railsのデフォルトの設定を予め退避しておく-->
+    <%= render 'layouts/rails_default'%>
   </head>
 
   <body>
-    <%= yield %>
+    <!--ヘッダーのパーシャル-->
+    <%= render'layouts/header'%>
+    <div class="container">
+      <%= yield %>
+      <!--フッターのパーシャル-->
+      <%= render'layouts/footer'%>
+    </div>
   </body>
 </html>
