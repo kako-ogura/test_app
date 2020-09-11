@@ -10,9 +10,14 @@
     <!--ヘッダーのパーシャル-->
     <%= render'layouts/header'%>
     <div class="container">
+      <!--エラーメッセージ-->
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
       <%= yield %>
       <!--フッターのパーシャル-->
       <%= render'layouts/footer'%>
+      <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>
