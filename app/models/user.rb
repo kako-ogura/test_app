@@ -13,4 +13,11 @@ class User < ApplicationRecord
   #パスワードのセキュリティ強化
   has_secure_password
   validates :password, presence:true, length:{minimum:4}
+
+  #fixtureテスト用に文字列のハッシュ化を返す
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end
