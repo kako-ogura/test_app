@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token
   before_save { email.downcase! }
   #なんのバリデーションか記述する
   validates :firstname,presence:true,length:{maximum:50} #存在性(presence) / 長さ(length)
@@ -12,7 +13,7 @@ class User < ApplicationRecord
 
   #パスワードのセキュリティ強化
   has_secure_password
-  validates :password, presence:true, length:{minimum:4}
+  validates :password, presence:true, length:{minimum:4},allow_nil: true #空のパスワードでも有効にする
 
   #fixtureテスト用に文字列のハッシュ化を返す
   class << self
@@ -30,8 +31,9 @@ class User < ApplicationRecord
   #永続セッションのためにユーザーをデータベースに記憶させる
   def remember
     self.remember_token = User.new_token
-    update_attribute(:remember_digest,User.digest(remember_token))
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
+
 
  # 渡されたトークンがダイジェストと一致したらtrueを返す
   def authenticated?(remember_token)

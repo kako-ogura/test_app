@@ -3,11 +3,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email:params[:session][:email].downcase) #有効なアドレスをキャッチする
+    user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      #remember_me送信処理
-      params[:session][:remember_me] == '1' ? remember(user) :forget(user) #1はON
+      log_in ?user
+      # p 'test'
+      # exit
+      # params[:session][:remember_me] == '1' ? remember(?user) : forget(user)
       redirect_to user
     else
       #falsh.nowのメッセージはその後リクエストが発生したときに消滅
