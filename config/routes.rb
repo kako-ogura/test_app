@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  get 'static_pages/home'
   # as: でルートの置き換えができる
   get '/help', to:'static_pages#help' #as:'helf'
   get '/about', to:'static_pages#about'
   get '/contact', to:'static_pages#contact'
 
   get '/signup', to:'users#new'
-
-  get '/edit', to:'users#edit'
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

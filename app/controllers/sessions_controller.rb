@@ -4,11 +4,8 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      log_in ?user
-      # p 'test'
-      # exit
-      # params[:session][:remember_me] == '1' ? remember(?user) : forget(user)
+     if user&.authenticate(params[:session][:password])
+      log_in user
       redirect_to user
     else
       #falsh.nowのメッセージはその後リクエストが発生したときに消滅
@@ -18,8 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    #ログイン中の場合のみログアウトする
-    log_out if logged_in?
+    log_out
     redirect_to root_url
   end
 end
