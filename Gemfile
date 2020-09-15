@@ -13,6 +13,7 @@ gem 'rails-controller-testing'
 gem 'sqlite3', '~> 1.4'
 #最先端のハッシュ関数
 gem 'bcrypt', '3.1.13'
+gem 'faker', '2.1.2'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
