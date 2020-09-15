@@ -1,6 +1,8 @@
 <li>
   <%= link_to user.firstname, user %>
-  <% if !current_user?(user) %>
+  <%= link_to user.lastname, user %>
+  <!--管理人のみ操作可能-->
+  <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
