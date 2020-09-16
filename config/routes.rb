@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   root 'static_pages#home'
   # as: でルートの置き換えができる
   get '/help', to:'static_pages#help' #as:'helf'
@@ -17,4 +19,5 @@ Rails.application.routes.draw do
   # URL(/users/1)を追加する
   resources :users
   resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 end
