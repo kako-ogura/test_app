@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   #ユーザーの一覧が見ることができる
   def show
     @user = User.find(params[:id])
+    @microposts =  @user.microposts.paginate(page: params[:page])
   end
 
   #signupする
@@ -43,15 +44,6 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
-  # ログイン済みユーザーかどうか確認
-   def logged_in_user
-     unless logged_in?
-       store_location
-       flash[:danger] = "Please log in."
-       redirect_to login_url
-     end
-   end
 
    # 正しいユーザーかどうか確認
   def correct_user
